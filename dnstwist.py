@@ -28,6 +28,7 @@ __author__ = 'Marcin Ulikowski'
 __version__ = '20250130'
 __email__ = 'marcin@ulikowski.pl'
 
+import string
 import re
 import sys
 import socket
@@ -824,6 +825,22 @@ class Fuzzer():
 				})
 		return result
 
+	def _exhaustive_alphanumeric(self):
+		import string 
+		chars = string.ascii_lowercase + string.digits
+		out = set()
+		for i in range(len(self.domain) + 1):
+			for c in chars:
+				out.add(self.domain[:i] + c + self.domain[i:])
+		return out
+
+	def _insert_hyphens(self):
+		out = set()
+		for i in range(1, len(self.domain)):
+			if self.domain[i-1] != '-' and self.domain[i] != '-':
+				out.add(self.domain[:i} + '-' + self.domain[i:])
+		return out
+
 	def _tld(self):
 		if self.tld in self.tld_dictionary:
 			self.tld_dictionary.remove(self.tld)
@@ -837,6 +854,7 @@ class Fuzzer():
 			'addition', 'bitsquatting', 'cyrillic', 'homoglyph', 'hyphenation',
 			'insertion', 'omission', 'plural', 'repetition', 'replacement',
 			'subdomain', 'transposition', 'vowel-swap', 'dictionary',
+			'exhaustive-alphanumeric', 'insert-hyphens'
 		]:
 			try:
 				f = getattr(self, '_' + f_name.replace('-', '_'))
