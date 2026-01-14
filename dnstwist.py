@@ -838,7 +838,7 @@ class Fuzzer():
 		out = set()
 		for i in range(1, len(self.domain)):
 			if self.domain[i-1] != '-' and self.domain[i] != '-':
-				out.add(self.domain[:i} + '-' + self.domain[i:])
+				out.add(self.domain[:i] + '-' + self.domain[i:])
 		return out
 
 	def _tld(self):
