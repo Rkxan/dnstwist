@@ -854,7 +854,7 @@ class Fuzzer():
 			'addition', 'bitsquatting', 'cyrillic', 'homoglyph', 'hyphenation',
 			'insertion', 'omission', 'plural', 'repetition', 'replacement',
 			'subdomain', 'transposition', 'vowel-swap', 'dictionary',
-			'exhaustive-alphanumeric', 'insert-hyphens'
+			'exhaustive-alphanumeric', 'insert-hyphens',
 		]:
 			try:
 				f = getattr(self, '_' + f_name.replace('-', '_'))
